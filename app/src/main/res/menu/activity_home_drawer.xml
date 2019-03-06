@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <!--<item
+            android:id="@+id/nav_inventory"
+            android:icon="@drawable/ic_inventory_deac"
+            android:title="Inventory" />
+        <item
+            android:id="@+id/nav_sales"
+            android:icon="@drawable/ic_sales_deac"
+            android:title="Sales Report" />
+        <item
+            android:id="@+id/nav_time"
+            android:icon="@drawable/ic_time_deac"
+            android:title="Time Sheet" />-->
+        <item
+            android:id="@+id/nav_inventory"
+            android:title="Inventory" />
+        <item
+            android:id="@+id/nav_sales"
+            android:title="Sales Report" />
+        <item
+            android:id="@+id/nav_time"
+            android:title="Time Sheet" />
+    </group>
+
+    <item android:title="Tools">
+        <menu>
+            <!--<item
+                android:id="@+id/nav_signOut"
+                android:icon="@drawable/ic_signout_deac"
+                android:title="Sign Out" />-->
+
+            <item
+                android:id="@+id/nav_signOut"
+                android:title="Sign Out" />
+        </menu>
+    </item>
+
+</menu>
