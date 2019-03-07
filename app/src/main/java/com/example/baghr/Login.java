@@ -1,6 +1,8 @@
 package com.example.baghr;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -14,6 +16,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 public class Login extends Activity {
+
+    private boolean authenticated;
+    private ProgressDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +39,8 @@ public class Login extends Activity {
         EditText user = findViewById(R.id.username);
         EditText pass = findViewById(R.id.password);
 
+        final Context context = Login.this;
+
         TextView versionNumber = findViewById(R.id.versionNumber);
 
         // sets version number based on app bundle version
@@ -53,6 +60,37 @@ public class Login extends Activity {
                 Intent intent = new Intent(v.getContext(), CreateAccount.class);
 
                 startActivity(intent);
+            }
+        });
+
+        btnLogin.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // if fields are valid, try logging in
+                if (FieldValidate()) {
+                    // sets up progress dialog while page is loading
+                    dialog = new ProgressDialog(context);
+                    dialog.setMessage("Loading");
+                    dialog.setCancelable(false);
+                    dialog.setInverseBackgroundForced(false);
+                    dialog.show();
+
+                    //creates new thread used to login
+                    Thread backgroundThread = new Thread(new Runnable() {
+                        public void run() {
+                            authenticated = false;
+                            String username = ((EditText) findViewById(R.id.username)).getText().toString();
+                            String password = ((EditText) findViewById(R.id.password)).getText().toString();
+
+                            // add authentication code later
+
+                            launchActivity();
+
+                            dialog.dismiss();
+                        }
+                    });
+                    // start login thread in background
+                    backgroundThread.start();
+                }
             }
         });
 
