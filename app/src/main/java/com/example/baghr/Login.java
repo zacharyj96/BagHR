@@ -20,6 +20,7 @@ public class Login extends Activity {
 
     private boolean authenticated;
     private ProgressDialog dialog;
+    DatabaseHelper mDatabaseHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +33,7 @@ public class Login extends Activity {
 
         //mydatabase.execSQL("CREATE TABLE IF NOT EXISTS Account (email TEXT PRIMARY KEY, first_name TEXT NOT NULL, last_name TEXT NOT NULL, password TEXT NOT NULL);");
 
+        mDatabaseHelper = new DatabaseHelper(this);
 
 
         // hides keyboard when activity is pressed
@@ -125,4 +127,5 @@ public class Login extends Activity {
 
         return !username.getText().equals("") && !password.getText().equals("");
     }
+
 }
