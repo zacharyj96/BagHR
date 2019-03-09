@@ -28,9 +28,9 @@ public class Login extends Activity {
 
         setupWindowAnimations();
 
-        SQLiteDatabase mydatabase = openOrCreateDatabase("BagHR", MODE_PRIVATE, null);
+        //SQLiteDatabase mydatabase = openOrCreateDatabase("BagHR", MODE_PRIVATE, null);
 
-        mydatabase.execSQL("CREATE TABLE IF NOT EXISTS Account (email TEXT PRIMARY KEY, first_name TEXT NOT NULL, last_name TEXT NOT NULL, password TEXT NOT NULL);");
+        //mydatabase.execSQL("CREATE TABLE IF NOT EXISTS Account (email TEXT PRIMARY KEY, first_name TEXT NOT NULL, last_name TEXT NOT NULL, password TEXT NOT NULL);");
 
 
 
