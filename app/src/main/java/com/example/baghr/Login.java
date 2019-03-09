@@ -14,6 +14,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.database.sqlite.*;
 
 public class Login extends Activity {
 
@@ -26,6 +27,12 @@ public class Login extends Activity {
         setContentView(R.layout.activity_login);
 
         setupWindowAnimations();
+
+        SQLiteDatabase mydatabase = openOrCreateDatabase("BagHR", MODE_PRIVATE, null);
+
+        mydatabase.execSQL("CREATE TABLE IF NOT EXISTS Account (email TEXT PRIMARY KEY, first_name TEXT NOT NULL, last_name TEXT NOT NULL, password TEXT NOT NULL);");
+
+
 
         // hides keyboard when activity is pressed
         findViewById(R.id.mainLayoutLogin).setOnClickListener(new View.OnClickListener() {
