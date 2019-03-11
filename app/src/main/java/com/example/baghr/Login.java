@@ -1,8 +1,10 @@
 package com.example.baghr;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -15,6 +17,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.database.sqlite.*;
+
+import java.security.Key;
+import java.security.spec.KeySpec;
+import java.util.Arrays;
+import java.util.List;
+
+import javax.crypto.SecretKeyFactory;
+import javax.crypto.spec.PBEKeySpec;
 
 public class Login extends Activity {
 
@@ -91,10 +101,96 @@ public class Login extends Activity {
                             String username = ((EditText) findViewById(R.id.username)).getText().toString();
                             String password = ((EditText) findViewById(R.id.password)).getText().toString();
 
-                            // add authentication code later
+                            // authentication code
 
-                            launchActivity();
+                            List<User> users = mDatabaseHelper.getUserByEmail(username);
+                            if (users.size() > 0) {
+                                try {
+                                    User u = users.get(0);
+                                    SecretKeyFactory factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
 
+                                    // converts base64 string stored in database into byte array
+                                    byte[] bytePass = org.apache.commons.codec.binary.Base64.decodeBase64(u.password.getBytes());
+
+                                    // first 16 bytes is the salt
+                                    byte[] salt = Arrays.copyOfRange(bytePass, 0, 16);
+
+                                    // last 20 bytes is the password
+                                    byte[] compare = Arrays.copyOfRange(bytePass, 16, 36);
+
+                                    // takes user entered password and hashes it
+                                    KeySpec keyspec = new PBEKeySpec(password.toCharArray(), salt, 10000, 160);
+                                    Key key = factory.generateSecret(keyspec);
+
+                                    // if arrays equal, then user is authenticated
+
+                                    if (Arrays.equals(compare, key.getEncoded())) {
+                                        authenticated = true;
+                                    }
+                                } catch (Exception e) {
+                                    // error authenticating hash, display message
+                                    e.printStackTrace();
+                                    dialog.dismiss();
+                                    runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                                            builder.setMessage("Error authenticating password");
+                                            builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                                public void onClick(DialogInterface dialog, int id) {
+
+                                                }
+                                            });
+                                            AlertDialog dialog = builder.create();
+                                            dialog.show();
+                                        }
+                                    });
+                                }
+
+                                // if user is authenticated, load main activity
+                                if (authenticated) {
+                                    launchActivity();
+                                    dialog.dismiss();
+                                } else {
+                                    dialog.dismiss();
+                                    runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                                            builder.setMessage("Error authenticating password");
+                                            builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                                public void onClick(DialogInterface dialog, int id) {
+
+                                                }
+                                            });
+                                            AlertDialog dialog = builder.create();
+                                            dialog.show();
+                                        }
+                                    });
+                                }
+
+                                launchActivity();
+                                dialog.dismiss();
+                            } else {
+                                // user doesn't exist, display error message
+                                dialog.dismiss();
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                                        builder.setMessage("Account doesn't exist");
+                                        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                            public void onClick(DialogInterface dialog, int id) {
+
+                                            }
+                                        });
+                                        AlertDialog dialog = builder.create();
+                                        dialog.show();
+                                    }
+                                });
+                            }
+
+                            // dismisses progress dialog
                             dialog.dismiss();
                         }
                     });
