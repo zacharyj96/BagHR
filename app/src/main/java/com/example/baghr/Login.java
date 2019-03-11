@@ -33,7 +33,8 @@ public class Login extends Activity {
 
         //mydatabase.execSQL("CREATE TABLE IF NOT EXISTS Account (email TEXT PRIMARY KEY, first_name TEXT NOT NULL, last_name TEXT NOT NULL, password TEXT NOT NULL);");
 
-        mDatabaseHelper = new DatabaseHelper(this);
+
+        mDatabaseHelper = DatabaseHelper.getInstance(this);
 
 
         // hides keyboard when activity is pressed
@@ -125,7 +126,7 @@ public class Login extends Activity {
         EditText username = findViewById(R.id.username);
         EditText password = findViewById(R.id.password);
 
-        return !username.getText().equals("") && !password.getText().equals("");
+        return !username.getText().toString().equals("") && !password.getText().toString().equals("");
     }
 
 }
