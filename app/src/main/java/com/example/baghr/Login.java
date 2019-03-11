@@ -76,7 +76,7 @@ public class Login extends Activity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // if fields are valid, try logging in
-                if (FieldValidate()) {
+                if (fieldValidate()) {
                     // sets up progress dialog while page is loading
                     dialog = new ProgressDialog(context);
                     dialog.setMessage("Loading");
@@ -122,7 +122,7 @@ public class Login extends Activity {
         startActivity(intent);
     }
 
-    private boolean FieldValidate() {
+    private boolean fieldValidate() {
         EditText username = findViewById(R.id.username);
         EditText password = findViewById(R.id.password);
 

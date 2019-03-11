@@ -19,4 +19,8 @@ public class User {
         this(fn, ln, em, pw, "Standard");
     }
 
+    public User() {
+        this(null, null, null, null, null);
+    }
+
 }

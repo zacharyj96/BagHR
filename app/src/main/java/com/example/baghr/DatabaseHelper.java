@@ -2,10 +2,14 @@ package com.example.baghr;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.DatabaseErrorHandler;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class DatabaseHelper extends SQLiteOpenHelper{
 
@@ -17,7 +21,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     private static final String TABLE_INVENTORY = "Inventory";
     private static final String TABLE_HR = "HR";
 
-    public DatabaseHelper(Context context) {
+    private DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, 1);
     }
 
@@ -69,5 +73,32 @@ public class DatabaseHelper extends SQLiteOpenHelper{
             return false;
         else
             return true;
+    }
+
+    public List<User> getUserByEmail(String email) {
+        List<User> users = new ArrayList<>();
+        String acctSelectQuery = String.format("SELECT * FROM ACCOUNT WHERE email = '%s'", email);
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.rawQuery(acctSelectQuery, null);
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    User u = new User();
+                    u.first_name = cursor.getString(cursor.getColumnIndex("first_name"));
+                    u.last_name = cursor.getString(cursor.getColumnIndex("last_name"));
+                    u.email = cursor.getString(cursor.getColumnIndex("email"));
+                    u.password = cursor.getString(cursor.getColumnIndex("password"));
+                    u.type = cursor.getString(cursor.getColumnIndex("user_type"));
+                    users.add(u);
+                } while (cursor.moveToNext());
+            }
+        } catch (Exception e) {
+            Log.d(TAG, "Error retrieving user profile from database");
+        } finally {
+            if (cursor != null && !cursor.isClosed()) {
+                cursor.close();
+            }
+        }
+        return users;
     }
 }
