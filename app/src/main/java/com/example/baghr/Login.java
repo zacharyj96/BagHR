@@ -169,7 +169,6 @@ public class Login extends Activity {
                                     });
                                 }
 
-                                launchActivity();
                                 dialog.dismiss();
                             } else {
                                 // user doesn't exist, display error message
