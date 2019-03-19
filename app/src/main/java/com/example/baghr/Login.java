@@ -56,6 +56,8 @@ public class Login extends Activity {
             }
         });
 
+
+
         EditText user = findViewById(R.id.username);
         EditText pass = findViewById(R.id.password);
 
