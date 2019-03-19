@@ -1,11 +1,35 @@
 package com.example.baghr;
 
-public class User {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class User implements Parcelable {
+
+    public int describeContents() {return 0;}
+
     public String first_name;
     public String last_name;
     public String email;
     public String password;
     public String type;
+
+    // used to send User to next activity (between login and main activity)
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(first_name);
+        dest.writeString(last_name);
+        dest.writeString(email);
+        dest.writeString(password);
+        dest.writeString(type);
+    }
+
+    // used to receive User on new activity (from login to main activity)
+    public User(Parcel dest) {
+        first_name = dest.readString();
+        last_name = dest.readString();
+        email = dest.readString();
+        password = dest.readString();
+        type = dest.readString();
+    }
 
     public User(String fn, String ln, String em, String pw, String t) {
         first_name = fn;
@@ -23,4 +47,14 @@ public class User {
         this(null, null, null, null, null);
     }
 
+
+    public static final Parcelable.Creator<User> CREATOR = new Parcelable.Creator<User>() {
+        public User createFromParcel(Parcel parcel) {
+            return new User(parcel);
+        }
+
+        public User[] newArray(int size) {
+            return new User[0];
+        }
+    };
 }

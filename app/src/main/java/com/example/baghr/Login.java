@@ -127,7 +127,24 @@ public class Login extends Activity {
                                     // if arrays equal, then user is authenticated
 
                                     if (Arrays.equals(compare, key.getEncoded())) {
-                                        authenticated = true;
+                                        launchActivity(u);
+                                        dialog.dismiss();
+                                    } else {
+                                        dialog.dismiss();
+                                        runOnUiThread(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                                                builder.setMessage("Error authenticating password");
+                                                builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                                    public void onClick(DialogInterface dialog, int id) {
+
+                                                    }
+                                                });
+                                                AlertDialog dialog = builder.create();
+                                                dialog.show();
+                                            }
+                                        });
                                     }
                                 } catch (Exception e) {
                                     // error authenticating hash, display message
@@ -148,30 +165,6 @@ public class Login extends Activity {
                                         }
                                     });
                                 }
-
-                                // if user is authenticated, load main activity
-                                if (authenticated) {
-                                    launchActivity();
-                                    dialog.dismiss();
-                                } else {
-                                    dialog.dismiss();
-                                    runOnUiThread(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                                            builder.setMessage("Error authenticating password");
-                                            builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                                                public void onClick(DialogInterface dialog, int id) {
-
-                                                }
-                                            });
-                                            AlertDialog dialog = builder.create();
-                                            dialog.show();
-                                        }
-                                    });
-                                }
-
-                                dialog.dismiss();
                             } else {
                                 // user doesn't exist, display error message
                                 dialog.dismiss();
@@ -213,9 +206,9 @@ public class Login extends Activity {
     }
 
     // launches main activity
-    private void launchActivity() {
+    private void launchActivity(User u) {
         Intent intent = new Intent(this, Main.class);
-
+        intent.putExtra("USER", u);
         startActivity(intent);
     }
 
