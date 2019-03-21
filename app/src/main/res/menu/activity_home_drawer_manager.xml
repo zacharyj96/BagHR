@@ -20,6 +20,9 @@
             android:id="@+id/nav_inventory"
             android:title="Inventory" />
         <item
+            android:id="@+id/nav_sales"
+            android:title="Sales Report" />
+        <item
             android:id="@+id/nav_time"
             android:title="Time Sheet" />
     </group>

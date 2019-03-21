@@ -17,11 +17,11 @@
             android:icon="@drawable/ic_time_deac"
             android:title="Time Sheet" />-->
         <item
-            android:id="@+id/nav_inventory"
-            android:title="Inventory" />
-        <item
             android:id="@+id/nav_time"
             android:title="Time Sheet" />
+        <item
+            android:id="@+id/nav_payroll"
+            android:title="Payroll" />
     </group>
 
     <item android:title="Tools">
