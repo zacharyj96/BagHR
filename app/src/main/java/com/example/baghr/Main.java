@@ -24,6 +24,8 @@ import java.util.Calendar;
 
 public class Main extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
+    User currentUser;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,8 +33,12 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
 
         // loads first fragment into activity
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.mainFragment, new Inventory());
+        ft.replace(R.id.mainFragment, new Settings());
         ft.commit();
+
+        // loads user
+        Intent intent = getIntent();
+        currentUser = intent.getParcelableExtra("USER");
 
         //sets up toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -46,10 +52,20 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
 
         // sets up navigation view
         NavigationView navigationView = findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
 
-        // receives objects from login page
-        Intent intent = getIntent();
+        navigationView.getMenu().clear();
+
+        // get menu based on user type
+        if (currentUser.type == "admin") {
+            navigationView.inflateMenu(R.menu.activity_home_drawer_admin);
+        } else if (currentUser.type == "manager") {
+            navigationView.inflateMenu(R.menu.activity_home_drawer_manager);
+        } else if (currentUser.type == "hr") {
+            navigationView.inflateMenu(R.menu.activity_home_drawer_hr);
+        } else {
+            navigationView.inflateMenu(R.menu.activity_home_drawer);
+        }
+        navigationView.setNavigationItemSelectedListener(this);
 
         // sets up window animations to transition from login
         setupWindowAnimations();
@@ -146,13 +162,36 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
                 }, 200);
                 break;
 
-            // inventory
+            // payroll
+            case 4:
+                fragment = fragmentManager.findFragmentByTag("Payroll");
+                tag = "Payroll";
+                fragmentClass = Payroll.class;
+                getSupportActionBar().setTitle("Payroll");
+                break;
+
+            // news
+            case 5:
+                fragment = fragmentManager.findFragmentByTag("News");
+                tag = "News";
+                fragmentClass = News.class;
+                getSupportActionBar().setTitle("News");
+                break;
+
+            // settings
+            case 6:
+                fragment = fragmentManager.findFragmentByTag("Settings");
+                tag = "Settings";
+                fragmentClass = Settings.class;
+                getSupportActionBar().setTitle("Settings");
+                break;
+            // settings
             default:
-                fragment = fragmentManager.findFragmentByTag("Inventory");
-                tag = "Inventory";
-                fragmentClass = Inventory.class;
+                fragment = fragmentManager.findFragmentByTag("Settings");
+                tag = "Settings";
+                fragmentClass = Settings.class;
                 isBack = true;
-                getSupportActionBar().setTitle("Inventory");
+                getSupportActionBar().setTitle("Settings");
         }
 
         // for every context code except log out, load a new fragment into memory
@@ -223,8 +262,17 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
             case R.id.nav_signOut:
                 launchActivityMenu(3, false);
                 break;
+            case R.id.nav_payroll:
+                launchActivityMenu(4, false);
+                break;
+            case R.id.nav_news:
+                launchActivityMenu(5, false);
+                break;
+            case R.id.nav_settings:
+                launchActivityMenu(6, false);
+                break;
             default:
-                launchActivityMenu(0, false);
+                launchActivityMenu(6, false);
         }
         return false;
     }
