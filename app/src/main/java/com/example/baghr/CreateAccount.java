@@ -76,7 +76,7 @@ public class CreateAccount extends AppCompatActivity {
 
                             String savedPasswordHash = new String(org.apache.commons.codec.binary.Base64.encodeBase64(hashBytes));
 
-                            User u = new User(fName, lName, em, savedPasswordHash);
+                            User u = new User(fName, lName, em, savedPasswordHash, 0);
 
                             addAccount(u);
                         } catch (Exception e) {

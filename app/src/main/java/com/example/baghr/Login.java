@@ -193,8 +193,6 @@ public class Login extends Activity {
                 }
             }
         });
-
-
     }
 
     // handles activity transitions

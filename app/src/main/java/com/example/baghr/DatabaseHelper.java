@@ -19,7 +19,6 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     private static final String DATABASE_NAME = "BagHrDatabase";
     private static final String TABLE_ACCOUNT = "Account";
     private static final String TABLE_INVENTORY = "Inventory";
-    private static final String TABLE_HR = "HR";
 
     private DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, 1);
@@ -34,11 +33,10 @@ public class DatabaseHelper extends SQLiteOpenHelper{
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String createTable = "CREATE TABLE IF NOT EXISTS Account (email TEXT PRIMARY KEY, first_name TEXT NOT NULL, last_name TEXT NOT NULL, password TEXT NOT NULL, user_type TEXT NOT NULL)";
+        String createTable = "CREATE TABLE IF NOT EXISTS Account (email TEXT PRIMARY KEY, first_name TEXT NOT NULL, last_name TEXT NOT NULL, password TEXT NOT NULL, hours_worked REAL, user_type TEXT NOT NULL)";
 
         // insert code for inventory creation here
 
-        // insert code for hr creation here
 
 
         db.execSQL(createTable);
@@ -50,7 +48,6 @@ public class DatabaseHelper extends SQLiteOpenHelper{
 
         // insert code for inventory drop here
 
-        // insert code for hr drop here
 
 
         onCreate(db);
@@ -63,9 +60,10 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         contentValues.put("last_name", u.last_name);
         contentValues.put("email", u.email);
         contentValues.put("password", u.password);
+        contentValues.put("hours_worked", u.hours_worked);
         contentValues.put("user_type", u.type);
 
-        Log.d(TAG, "addAccount: Adding " + u.first_name + " " + u.last_name + " " + u.email + " " + u.password + " " + u.type + " to " + TABLE_ACCOUNT);
+        Log.d(TAG, "addAccount: Adding " + u.first_name + " " + u.last_name + " " + u.email + " " + u.password + " " + u.hours_worked + " " + u.type + " to " + TABLE_ACCOUNT);
 
         long result = db.insert(TABLE_ACCOUNT, null, contentValues);
 
@@ -88,6 +86,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
                     u.last_name = cursor.getString(cursor.getColumnIndex("last_name"));
                     u.email = cursor.getString(cursor.getColumnIndex("email"));
                     u.password = cursor.getString(cursor.getColumnIndex("password"));
+                    u.hours_worked = cursor.getDouble(cursor.getColumnIndex("hours_worked"));
                     u.type = cursor.getString(cursor.getColumnIndex("user_type"));
                     users.add(u);
                 } while (cursor.moveToNext());
