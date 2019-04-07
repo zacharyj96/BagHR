@@ -1,6 +1,8 @@
 package com.example.baghr;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
@@ -9,15 +11,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import java.util.List;
+
 public class Shelf extends Fragment {
+
+    final Main mainActivity = (Main) getActivity();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_shelf, parent, false);
 
-        final Main mainActivity = (Main) getActivity();
-
-        Context context = getActivity();
+        final Context context = getActivity();
 
         Toolbar toolbar = mainActivity.findViewById(R.id.toolbar);
 
@@ -53,11 +57,35 @@ public class Shelf extends Fragment {
             @Override
             public void onClick(View v) {
                 mainActivity.currentItem.shelf = "A";
-                mainActivity.launchActivityMenu(8, false);
+                if (mainActivity.addingItem && !validateItem()) {
+                    mainActivity.launchActivityMenu(10, false);
+                } else if (!mainActivity.addingItem && validateItem()) {
+                    mainActivity.launchActivityMenu(11, false);
+                } else {
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                            builder.setMessage("Invalid location selected");
+                            builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+
+                                }
+                            });
+                            AlertDialog dialog = builder.create();
+                            dialog.show();
+                        }
+                    });
+                }
             }
         });
 
         return view;
+    }
+
+    private boolean validateItem() {
+        List<Item> items = mainActivity.mDatabaseHelper.getItemByLocation(mainActivity.currentItem.aisle, mainActivity.currentItem.row_number, mainActivity.currentItem.shelf);
+        return items.size() > 0;
     }
 
     @Override

@@ -36,7 +36,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         String createAccount = "CREATE TABLE IF NOT EXISTS Account (email TEXT PRIMARY KEY, first_name TEXT NOT NULL, last_name TEXT NOT NULL, password TEXT NOT NULL, hours_worked REAL, user_type TEXT NOT NULL)";
 
         // insert code for inventory creation here
-        String createInventory = "CREATE TABLE IF NOT EXISTS Inventory (item_number INTEGER PRIMARY KEY, aisle TEXT NOT NULL, row_number INTEGER NOT NULL, shelf TEXT NOT NULL, description TEXT NOT NULL)";
+        String createInventory = "CREATE TABLE IF NOT EXISTS Inventory (item_number INTEGER PRIMARY KEY, aisle TEXT NOT NULL, row_number INTEGER NOT NULL, shelf TEXT NOT NULL, description TEXT NOT NULL, is_stored INTEGER)";
 
 
         db.execSQL(createAccount);
@@ -74,6 +74,62 @@ public class DatabaseHelper extends SQLiteOpenHelper{
             return false;
         else
             return true;
+    }
+
+    public List<Item> getItems(int stored) {
+        List<Item> items = new ArrayList<>();
+        String itemSelectQuery = String.format("SELECT * FROM Inventory WHERE is_stored = %d", stored);
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.rawQuery(itemSelectQuery, null);
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Item i = new Item();
+                    i.aisle = cursor.getString(cursor.getColumnIndex("aisle"));
+                    i.row_number = cursor.getInt(cursor.getColumnIndex("row_number"));
+                    i.shelf = cursor.getString(cursor.getColumnIndex("shelf"));
+                    i.item_number = cursor.getInt(cursor.getColumnIndex("item_number"));
+                    i.description = cursor.getString(cursor.getColumnIndex("description"));
+                    i.is_stored = cursor.getInt(cursor.getColumnIndex("is_stored"));
+                    items.add(i);
+                } while (cursor.moveToNext());
+            }
+        } catch (Exception e) {
+            Log.d(TAG, "Error retrieving item profile from database");
+        } finally {
+            if (cursor != null && !cursor.isClosed()) {
+                cursor.close();
+            }
+        }
+        return items;
+    }
+
+    public List<Item> getItemByLocation(String aisle, int row, String shelf) {
+        List<Item> items = new ArrayList<>();
+        String itemSelectQuery = String.format("SELECT * FROM Inventory WHERE aisle = '%s' AND row_number = '%d' AND shelf = '%s' AND is_stored = 1", aisle, row, shelf);
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.rawQuery(itemSelectQuery, null);
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Item i = new Item();
+                    i.aisle = cursor.getString(cursor.getColumnIndex("aisle"));
+                    i.row_number = cursor.getInt(cursor.getColumnIndex("row_number"));
+                    i.shelf = cursor.getString(cursor.getColumnIndex("shelf"));
+                    i.item_number = cursor.getInt(cursor.getColumnIndex("item_number"));
+                    i.description = cursor.getString(cursor.getColumnIndex("description"));
+                    i.is_stored = cursor.getInt(cursor.getColumnIndex("is_stored"));
+                    items.add(i);
+                } while (cursor.moveToNext());
+            }
+        } catch (Exception e) {
+            Log.d(TAG, "Error retrieving item profile from database");
+        } finally {
+            if (cursor != null && !cursor.isClosed()) {
+                cursor.close();
+            }
+        }
+        return items;
     }
 
     public List<User> getUserByEmail(String email) {

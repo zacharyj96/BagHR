@@ -12,6 +12,7 @@ public class Item implements Parcelable {
     public int row_number;
     public String shelf;
     public String description;
+    public int is_stored;
 
     // used to send User to next activity (between login and main activity)
     public void writeToParcel(Parcel dest, int flags) {
@@ -20,6 +21,7 @@ public class Item implements Parcelable {
         dest.writeInt(row_number);
         dest.writeString(shelf);
         dest.writeString(description);
+        dest.writeInt(is_stored);
     }
 
     // used to receive User on new activity (from login to main activity)
@@ -29,18 +31,20 @@ public class Item implements Parcelable {
         row_number = dest.readInt();
         shelf = dest.readString();
         description = dest.readString();
+        is_stored = dest.readInt();
     }
 
-    public Item(int i, String a, int r, String s, String d) {
+    public Item(int i, String a, int r, String s, String d, int is) {
         item_number = i;
         aisle = a;
         row_number = r;
         shelf = s;
         description = d;
+        is_stored = is;
     }
 
     public Item() {
-        this(0, null, 0, null, null);
+        this(0, null, 0, null, null, 0);
     }
 
 

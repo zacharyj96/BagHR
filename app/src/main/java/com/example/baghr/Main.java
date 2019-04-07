@@ -30,6 +30,8 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
 
     Item currentItem;
 
+    DatabaseHelper mDatabaseHelper;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +41,8 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.mainFragment, new Settings());
         ft.commit();
+
+        mDatabaseHelper = DatabaseHelper.getInstance(this);
 
         // loads user
         Intent intent = getIntent();
@@ -212,6 +216,22 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
                 tag = "Shelf";
                 fragmentClass = Shelf.class;
                 getSupportActionBar().setTitle("Shelf");
+                break;
+
+            // add item
+            case 10:
+                fragment = fragmentManager.findFragmentByTag("AddItem");
+                tag = "AddItem";
+                fragmentClass = AddItem.class;
+                getSupportActionBar().setTitle("Add Item");
+                break;
+
+            // remove item
+            case 11:
+                fragment = fragmentManager.findFragmentByTag("RemoveItem");
+                tag = "RemoveItem";
+                fragmentClass = RemoveItem.class;
+                getSupportActionBar().setTitle("Remove Item");
                 break;
 
             // settings
