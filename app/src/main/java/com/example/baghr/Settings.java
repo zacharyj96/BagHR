@@ -6,8 +6,11 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 public class Settings extends Fragment {
+
+    User currentUser;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
@@ -17,6 +20,18 @@ public class Settings extends Fragment {
 
         Context context = getActivity();
 
+        currentUser = mainActivity.currentUser;
+
+        TextView firstName = mainActivity.findViewById(R.id.settingsFirst);
+        TextView lastName = mainActivity.findViewById(R.id.settingsLast);
+        TextView email = mainActivity.findViewById(R.id.settingsEmail);
+        TextView type = mainActivity.findViewById(R.id.settingsType);
+
+        firstName.setText(currentUser.first_name);
+        lastName.setText(currentUser.last_name);
+        email.setText(currentUser.email);
+        type.setText(currentUser.type);
+
         return view;
     }
 
@@ -24,5 +39,6 @@ public class Settings extends Fragment {
     public void onDestroyView() {
         //fragment cleanup
         super.onDestroyView();
+        currentUser = null;
     }
 }
