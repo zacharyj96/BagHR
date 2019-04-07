@@ -44,7 +44,7 @@ public class User implements Parcelable {
     }
 
     public User (String fn, String ln, String em, String pw, double h) {
-        this(fn, ln, em, pw, h, "Standard");
+        this(fn, ln, em, pw, h, "admin");
     }
 
     public User() {
