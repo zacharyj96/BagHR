@@ -14,7 +14,7 @@ public class RemoveItem extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
-        final View view = inflater.inflate(R.layout.fragment_removeitem, parent, false);
+        View view = inflater.inflate(R.layout.fragment_removeitem, parent, false);
 
         final Main mainActivity = (Main) getActivity();
 

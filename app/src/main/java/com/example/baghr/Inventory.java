@@ -45,7 +45,7 @@ public class Inventory extends Fragment {
         viewInv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mainActivity.launchActivityMenu(, false);
+                mainActivity.launchActivityMenu(12, false);
             }
         });
 

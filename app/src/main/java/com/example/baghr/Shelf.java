@@ -19,7 +19,7 @@ public class Shelf extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
-        final View view = inflater.inflate(R.layout.fragment_shelf, parent, false);
+        View view = inflater.inflate(R.layout.fragment_shelf, parent, false);
 
         final Context context = getActivity();
 

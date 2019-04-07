@@ -234,6 +234,14 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
                 getSupportActionBar().setTitle("Remove Item");
                 break;
 
+            // view inventory
+            case 12:
+                fragment = fragmentManager.findFragmentByTag("ViewInventory");
+                tag = "ViewInventory";
+                fragmentClass = ViewInventory.class;
+                getSupportActionBar().setTitle("View Inventory");
+                break;
+
             // settings
             default:
                 fragment = fragmentManager.findFragmentByTag("Settings");

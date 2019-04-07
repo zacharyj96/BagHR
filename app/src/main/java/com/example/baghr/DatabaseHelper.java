@@ -122,8 +122,8 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         return count;
     }
 
-    public List<Item> getItems(int stored) {
-        List<Item> items = new ArrayList<>();
+    public ArrayList<Item> getItems(int stored) {
+        ArrayList<Item> items = new ArrayList<>();
         String itemSelectQuery = String.format("SELECT * FROM Inventory WHERE is_stored = %d", stored);
         SQLiteDatabase db = getReadableDatabase();
         Cursor cursor = db.rawQuery(itemSelectQuery, null);
@@ -150,8 +150,8 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         return items;
     }
 
-    public List<Item> getItemByLocation(String aisle, int row, String shelf) {
-        List<Item> items = new ArrayList<>();
+    public ArrayList<Item> getItemByLocation(String aisle, int row, String shelf) {
+        ArrayList<Item> items = new ArrayList<>();
         String itemSelectQuery = String.format("SELECT * FROM Inventory WHERE aisle = '%s' AND row_number = %d AND shelf = '%s' AND is_stored = 1", aisle, row, shelf);
         SQLiteDatabase db = getReadableDatabase();
         Cursor cursor = db.rawQuery(itemSelectQuery, null);
@@ -178,8 +178,8 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         return items;
     }
 
-    public List<User> getUserByEmail(String email) {
-        List<User> users = new ArrayList<>();
+    public ArrayList<User> getUserByEmail(String email) {
+        ArrayList<User> users = new ArrayList<>();
         String acctSelectQuery = String.format("SELECT * FROM ACCOUNT WHERE email = '%s'", email);
         SQLiteDatabase db = getReadableDatabase();
         Cursor cursor = db.rawQuery(acctSelectQuery, null);

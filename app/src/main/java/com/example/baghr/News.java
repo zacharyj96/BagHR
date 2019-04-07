@@ -11,7 +11,7 @@ public class News extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
-        final View view = inflater.inflate(R.layout.fragment_news, parent, false);
+        View view = inflater.inflate(R.layout.fragment_news, parent, false);
 
         Main mainActivity = (Main) getActivity();
 

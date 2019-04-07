@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class Sales extends Fragment {
+public class ViewInventory extends Fragment {
 
     private RecyclerView rv;
 
@@ -21,20 +21,20 @@ public class Sales extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_sales, parent, false);
+        View view = inflater.inflate(R.layout.fragment_viewinventory, parent, false);
 
         final Main mainActivity = (Main) getActivity();
 
         Context context = getActivity();
 
-        itemsList = mainActivity.mDatabaseHelper.getItems(0);
+        itemsList = mainActivity.mDatabaseHelper.getItems(1);
 
         if (itemsList.size() == 0) {
             TextView txtBlank = view.findViewById(R.id.txtBlank);
             txtBlank.setText("No items found");
         }
 
-        rv = view.findViewById(R.id.rvSales);
+        rv = view.findViewById(R.id.rv);
         rv.setHasFixedSize(true);
 
         LinearLayoutManager llm = new LinearLayoutManager(context);
@@ -43,6 +43,19 @@ public class Sales extends Fragment {
         // set up recycler view adapter based off of the ccurrent inventory
         RVAdapter adapter = new RVAdapter(itemsList, context);
         rv.setAdapter(adapter);
+
+        Toolbar toolbar = mainActivity.findViewById(R.id.toolbar);
+
+        // sets toolbar to be back arrow
+        //toolbar.setNavigationIcon(R.drawable.ic_arrow_back_white);
+
+        // navigate back when toolbar arrow is clicked
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mainActivity.launchActivityMenu(0, true);
+            }
+        });
 
         return view;
     }
