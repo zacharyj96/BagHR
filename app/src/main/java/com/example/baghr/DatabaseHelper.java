@@ -97,6 +97,12 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         }
     }
 
+    public void updateIsStored(String aisle, int row, String shelf) {
+        String itemUpdateQuery = String.format("UPDATE Inventory SET is_stored = 0 WHERE aisle = '%s' AND row_number = %d AND shelf = '%s'", aisle, row, shelf);
+        SQLiteDatabase db = getReadableDatabase();
+        db.execSQL(itemUpdateQuery);
+    }
+
     public int getNumItems() {
         int count = -1;
         String itemSelectQuery = String.format("SELECT * FROM Inventory");
@@ -146,7 +152,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
 
     public List<Item> getItemByLocation(String aisle, int row, String shelf) {
         List<Item> items = new ArrayList<>();
-        String itemSelectQuery = String.format("SELECT * FROM Inventory WHERE aisle = '%s' AND row_number = '%d' AND shelf = '%s' AND is_stored = 1", aisle, row, shelf);
+        String itemSelectQuery = String.format("SELECT * FROM Inventory WHERE aisle = '%s' AND row_number = %d AND shelf = '%s' AND is_stored = 1", aisle, row, shelf);
         SQLiteDatabase db = getReadableDatabase();
         Cursor cursor = db.rawQuery(itemSelectQuery, null);
         try {
