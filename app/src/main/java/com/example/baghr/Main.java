@@ -26,6 +26,10 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
 
     User currentUser;
 
+    boolean addingItem;
+
+    Item currentItem;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -185,6 +189,31 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
                 fragmentClass = Settings.class;
                 getSupportActionBar().setTitle("Settings");
                 break;
+
+            // aisle
+            case 7:
+                fragment = fragmentManager.findFragmentByTag("Aisle");
+                tag = "Aisle";
+                fragmentClass = Aisle.class;
+                getSupportActionBar().setTitle("Aisle");
+                break;
+
+            // row
+            case 8:
+                fragment = fragmentManager.findFragmentByTag("Row");
+                tag = "Row";
+                fragmentClass = Row.class;
+                getSupportActionBar().setTitle("Row");
+                break;
+
+            // shelf
+            case 9:
+                fragment = fragmentManager.findFragmentByTag("Shelf");
+                tag = "Shelf";
+                fragmentClass = Shelf.class;
+                getSupportActionBar().setTitle("Shelf");
+                break;
+
             // settings
             default:
                 fragment = fragmentManager.findFragmentByTag("Settings");

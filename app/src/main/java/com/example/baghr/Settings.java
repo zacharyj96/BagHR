@@ -22,10 +22,10 @@ public class Settings extends Fragment {
 
         currentUser = mainActivity.currentUser;
 
-        TextView firstName = mainActivity.findViewById(R.id.settingsFirst);
-        TextView lastName = mainActivity.findViewById(R.id.settingsLast);
-        TextView email = mainActivity.findViewById(R.id.settingsEmail);
-        TextView type = mainActivity.findViewById(R.id.settingsType);
+        TextView firstName = view.findViewById(R.id.settingsFirst);
+        TextView lastName = view.findViewById(R.id.settingsLast);
+        TextView email = view.findViewById(R.id.settingsEmail);
+        TextView type = view.findViewById(R.id.settingsType);
 
         firstName.setText(currentUser.first_name);
         lastName.setText(currentUser.last_name);

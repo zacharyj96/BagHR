@@ -33,13 +33,14 @@ public class DatabaseHelper extends SQLiteOpenHelper{
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String createTable = "CREATE TABLE IF NOT EXISTS Account (email TEXT PRIMARY KEY, first_name TEXT NOT NULL, last_name TEXT NOT NULL, password TEXT NOT NULL, hours_worked REAL, user_type TEXT NOT NULL)";
+        String createAccount = "CREATE TABLE IF NOT EXISTS Account (email TEXT PRIMARY KEY, first_name TEXT NOT NULL, last_name TEXT NOT NULL, password TEXT NOT NULL, hours_worked REAL, user_type TEXT NOT NULL)";
 
         // insert code for inventory creation here
+        String createInventory = "CREATE TABLE IF NOT EXISTS Inventory (item_number INTEGER PRIMARY KEY, aisle TEXT NOT NULL, row_number INTEGER NOT NULL, shelf TEXT NOT NULL, description TEXT NOT NULL)";
 
 
-
-        db.execSQL(createTable);
+        db.execSQL(createAccount);
+        db.execSQL(createInventory);
     }
 
     @Override
@@ -47,6 +48,8 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_ACCOUNT);
 
         // insert code for inventory drop here
+
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_INVENTORY);
 
 
 
