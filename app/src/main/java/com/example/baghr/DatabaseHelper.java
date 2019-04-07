@@ -76,6 +76,46 @@ public class DatabaseHelper extends SQLiteOpenHelper{
             return true;
     }
 
+    public boolean addItem(Item i) {
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("aisle", i.aisle);
+        contentValues.put("row_number", i.row_number);
+        contentValues.put("shelf", i.shelf);
+        contentValues.put("item_number", i.item_number);
+        contentValues.put("description", i.description);
+        contentValues.put("is_stored", i.is_stored);
+
+        Log.d(TAG, "addItem: Adding " + i.aisle + " " + i.row_number + " " + i.shelf + " " + i.item_number + " " + i.description + " " + i.is_stored + " to " + TABLE_INVENTORY);
+
+        long result = db.insert(TABLE_INVENTORY, null, contentValues);
+
+        if (result == -1) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    public int getNumItems() {
+        int count = -1;
+        String itemSelectQuery = String.format("SELECT * FROM Inventory");
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.rawQuery(itemSelectQuery, null);
+        try {
+            if (cursor.moveToFirst()) {
+                count = cursor.getCount();
+            }
+        } catch (Exception e) {
+            Log.d(TAG, "Error retrieving item count from database");
+        } finally {
+            if (cursor != null && !cursor.isClosed()) {
+                cursor.close();
+            }
+        }
+        return count;
+    }
+
     public List<Item> getItems(int stored) {
         List<Item> items = new ArrayList<>();
         String itemSelectQuery = String.format("SELECT * FROM Inventory WHERE is_stored = %d", stored);

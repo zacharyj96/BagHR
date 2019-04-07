@@ -80,6 +80,398 @@ public class Shelf extends Fragment {
             }
         });
 
+        // navigates to add/remove page
+        shelfB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mainActivity.currentItem.shelf = "B";
+                if (mainActivity.addingItem && !validateItem()) {
+                    mainActivity.launchActivityMenu(10, false);
+                } else if (!mainActivity.addingItem && validateItem()) {
+                    mainActivity.launchActivityMenu(11, false);
+                } else {
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                            builder.setMessage("Invalid location selected");
+                            builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+
+                                }
+                            });
+                            AlertDialog dialog = builder.create();
+                            dialog.show();
+                        }
+                    });
+                }
+            }
+        });
+
+        // navigates to add/remove page
+        shelfC.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mainActivity.currentItem.shelf = "C";
+                if (mainActivity.addingItem && !validateItem()) {
+                    mainActivity.launchActivityMenu(10, false);
+                } else if (!mainActivity.addingItem && validateItem()) {
+                    mainActivity.launchActivityMenu(11, false);
+                } else {
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                            builder.setMessage("Invalid location selected");
+                            builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+
+                                }
+                            });
+                            AlertDialog dialog = builder.create();
+                            dialog.show();
+                        }
+                    });
+                }
+            }
+        });
+
+        // navigates to add/remove page
+        shelfD.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mainActivity.currentItem.shelf = "D";
+                if (mainActivity.addingItem && !validateItem()) {
+                    mainActivity.launchActivityMenu(10, false);
+                } else if (!mainActivity.addingItem && validateItem()) {
+                    mainActivity.launchActivityMenu(11, false);
+                } else {
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                            builder.setMessage("Invalid location selected");
+                            builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+
+                                }
+                            });
+                            AlertDialog dialog = builder.create();
+                            dialog.show();
+                        }
+                    });
+                }
+            }
+        });
+
+        // navigates to add/remove page
+        shelfE.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mainActivity.currentItem.shelf = "E";
+                if (mainActivity.addingItem && !validateItem()) {
+                    mainActivity.launchActivityMenu(10, false);
+                } else if (!mainActivity.addingItem && validateItem()) {
+                    mainActivity.launchActivityMenu(11, false);
+                } else {
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                            builder.setMessage("Invalid location selected");
+                            builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+
+                                }
+                            });
+                            AlertDialog dialog = builder.create();
+                            dialog.show();
+                        }
+                    });
+                }
+            }
+        });
+
+        // navigates to add/remove page
+        shelfF.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mainActivity.currentItem.shelf = "F";
+                if (mainActivity.addingItem && !validateItem()) {
+                    mainActivity.launchActivityMenu(10, false);
+                } else if (!mainActivity.addingItem && validateItem()) {
+                    mainActivity.launchActivityMenu(11, false);
+                } else {
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                            builder.setMessage("Invalid location selected");
+                            builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+
+                                }
+                            });
+                            AlertDialog dialog = builder.create();
+                            dialog.show();
+                        }
+                    });
+                }
+            }
+        });
+
+        // navigates to add/remove page
+        shelfG.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mainActivity.currentItem.shelf = "G";
+                if (mainActivity.addingItem && !validateItem()) {
+                    mainActivity.launchActivityMenu(10, false);
+                } else if (!mainActivity.addingItem && validateItem()) {
+                    mainActivity.launchActivityMenu(11, false);
+                } else {
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                            builder.setMessage("Invalid location selected");
+                            builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+
+                                }
+                            });
+                            AlertDialog dialog = builder.create();
+                            dialog.show();
+                        }
+                    });
+                }
+            }
+        });
+
+        // navigates to add/remove page
+        shelfH.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mainActivity.currentItem.shelf = "H";
+                if (mainActivity.addingItem && !validateItem()) {
+                    mainActivity.launchActivityMenu(10, false);
+                } else if (!mainActivity.addingItem && validateItem()) {
+                    mainActivity.launchActivityMenu(11, false);
+                } else {
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                            builder.setMessage("Invalid location selected");
+                            builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+
+                                }
+                            });
+                            AlertDialog dialog = builder.create();
+                            dialog.show();
+                        }
+                    });
+                }
+            }
+        });
+
+        // navigates to add/remove page
+        shelfI.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mainActivity.currentItem.shelf = "I";
+                if (mainActivity.addingItem && !validateItem()) {
+                    mainActivity.launchActivityMenu(10, false);
+                } else if (!mainActivity.addingItem && validateItem()) {
+                    mainActivity.launchActivityMenu(11, false);
+                } else {
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                            builder.setMessage("Invalid location selected");
+                            builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+
+                                }
+                            });
+                            AlertDialog dialog = builder.create();
+                            dialog.show();
+                        }
+                    });
+                }
+            }
+        });
+
+        // navigates to add/remove page
+        shelfJ.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mainActivity.currentItem.shelf = "J";
+                if (mainActivity.addingItem && !validateItem()) {
+                    mainActivity.launchActivityMenu(10, false);
+                } else if (!mainActivity.addingItem && validateItem()) {
+                    mainActivity.launchActivityMenu(11, false);
+                } else {
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                            builder.setMessage("Invalid location selected");
+                            builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+
+                                }
+                            });
+                            AlertDialog dialog = builder.create();
+                            dialog.show();
+                        }
+                    });
+                }
+            }
+        });
+
+        // navigates to add/remove page
+        shelfK.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mainActivity.currentItem.shelf = "K";
+                if (mainActivity.addingItem && !validateItem()) {
+                    mainActivity.launchActivityMenu(10, false);
+                } else if (!mainActivity.addingItem && validateItem()) {
+                    mainActivity.launchActivityMenu(11, false);
+                } else {
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                            builder.setMessage("Invalid location selected");
+                            builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+
+                                }
+                            });
+                            AlertDialog dialog = builder.create();
+                            dialog.show();
+                        }
+                    });
+                }
+            }
+        });
+
+        // navigates to add/remove page
+        shelfL.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mainActivity.currentItem.shelf = "L";
+                if (mainActivity.addingItem && !validateItem()) {
+                    mainActivity.launchActivityMenu(10, false);
+                } else if (!mainActivity.addingItem && validateItem()) {
+                    mainActivity.launchActivityMenu(11, false);
+                } else {
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                            builder.setMessage("Invalid location selected");
+                            builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+
+                                }
+                            });
+                            AlertDialog dialog = builder.create();
+                            dialog.show();
+                        }
+                    });
+                }
+            }
+        });
+
+        // navigates to add/remove page
+        shelfM.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mainActivity.currentItem.shelf = "M";
+                if (mainActivity.addingItem && !validateItem()) {
+                    mainActivity.launchActivityMenu(10, false);
+                } else if (!mainActivity.addingItem && validateItem()) {
+                    mainActivity.launchActivityMenu(11, false);
+                } else {
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                            builder.setMessage("Invalid location selected");
+                            builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+
+                                }
+                            });
+                            AlertDialog dialog = builder.create();
+                            dialog.show();
+                        }
+                    });
+                }
+            }
+        });
+
+        // navigates to add/remove page
+        shelfN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mainActivity.currentItem.shelf = "N";
+                if (mainActivity.addingItem && !validateItem()) {
+                    mainActivity.launchActivityMenu(10, false);
+                } else if (!mainActivity.addingItem && validateItem()) {
+                    mainActivity.launchActivityMenu(11, false);
+                } else {
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                            builder.setMessage("Invalid location selected");
+                            builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+
+                                }
+                            });
+                            AlertDialog dialog = builder.create();
+                            dialog.show();
+                        }
+                    });
+                }
+            }
+        });
+
+        // navigates to add/remove page
+        shelfO.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mainActivity.currentItem.shelf = "O";
+                if (mainActivity.addingItem && !validateItem()) {
+                    mainActivity.launchActivityMenu(10, false);
+                } else if (!mainActivity.addingItem && validateItem()) {
+                    mainActivity.launchActivityMenu(11, false);
+                } else {
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                            builder.setMessage("Invalid location selected");
+                            builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+
+                                }
+                            });
+                            AlertDialog dialog = builder.create();
+                            dialog.show();
+                        }
+                    });
+                }
+            }
+        });
+
         return view;
     }
 
