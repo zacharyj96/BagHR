@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainLayoutLogin"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark"
     android:focusable="true"
     android:focusableInTouchMode="true"
-    tools:context="com.example.baghr.Login"
     android:orientation="vertical"
-    android:background="@color/colorPrimaryDark"
-    android:id="@+id/mainLayoutLogin">
+    tools:context="com.example.baghr.Login">
 
     <!--<ImageView
         android:layout_width="match_parent"
@@ -46,55 +45,57 @@
             android:id="@+id/password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginBottom="20dp"
+            android:backgroundTint="#FFFFFF"
             android:ems="10"
             android:hint="Password"
             android:inputType="textPassword"
             android:textColor="#FFFFFF"
-            android:layout_marginTop="20dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-            android:layout_marginBottom="20dp"
             android:textColorHint="#FFFFFF"
-            android:backgroundTint="#FFFFFF"
-            app:backgroundTint="#FFFFFF"/>
-
+            app:backgroundTint="#FFFFFF" />
 
 
         <Button
             android:id="@+id/login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Login"
-            android:textColor="@color/colorPrimaryDark"
-            android:background="#FFFFFF"
-            android:layout_marginTop="20dp"
             android:layout_marginLeft="30dp"
+            android:layout_marginTop="20dp"
             android:layout_marginRight="30dp"
             android:layout_marginBottom="20dp"
-            android:textSize="14dp"/>
+            android:background="#FFFFFF"
+            android:text="Login"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="14dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:layout_marginLeft="30dp"
+            android:layout_marginTop="10dp"
             android:layout_marginRight="30dp"
-            android:layout_marginTop="10dp">
+            android:orientation="horizontal">
+
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:orientation="vertical">
+
                 <Button
                     android:id="@+id/signUp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Create Account"
                     android:layout_gravity="left"
-                    android:textColor="#FFFFFF"
                     android:background="@color/colorPrimaryDark"
                     android:minWidth="0dp"
-                    android:textSize="14dp"/>
+                    android:text="Create Account"
+                    android:textAlignment="center"
+                    android:textColor="#FFFFFF"
+                    android:textSize="14dp" />
             </LinearLayout>
             <!--<LinearLayout
                 android:layout_width="0dp"
@@ -113,19 +114,21 @@
                     android:textSize="14dp"/>
             </LinearLayout>-->
         </LinearLayout>
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:paddingBottom="10dp">
+
             <TextView
                 android:id="@+id/versionNumber"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
                 android:layout_gravity="center_horizontal|bottom"
                 android:textColor="#FFFFFF"
-                android:textSize="12dp"
-                android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true" />
+                android:textSize="12dp" />
         </RelativeLayout>
     </LinearLayout>
 
