@@ -15,11 +15,16 @@ import java.util.List;
 
 public class Shelf extends Fragment {
 
-    final Main mainActivity = (Main) getActivity();
+    Main mainActivity2;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_shelf, parent, false);
+
+
+        mainActivity2 = (Main) getActivity();
+
+        final Main mainActivity = (Main) getActivity();
 
         final Context context = getActivity();
 
@@ -476,7 +481,7 @@ public class Shelf extends Fragment {
     }
 
     private boolean validateItem() {
-        List<Item> items = mainActivity.mDatabaseHelper.getItemByLocation(mainActivity.currentItem.aisle, mainActivity.currentItem.row_number, mainActivity.currentItem.shelf);
+        List<Item> items = mainActivity2.mDatabaseHelper.getItemByLocation(mainActivity2.currentItem.aisle, mainActivity2.currentItem.row_number, mainActivity2.currentItem.shelf);
         return items.size() > 0;
     }
 

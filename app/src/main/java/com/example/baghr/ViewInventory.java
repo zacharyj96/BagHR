@@ -40,7 +40,7 @@ public class ViewInventory extends Fragment {
         LinearLayoutManager llm = new LinearLayoutManager(context);
         rv.setLayoutManager(llm);
 
-        // set up recycler view adapter based off of the ccurrent inventory
+        // set up recycler view adapter based off of the current inventory
         RVAdapter adapter = new RVAdapter(itemsList, context);
         rv.setAdapter(adapter);
 

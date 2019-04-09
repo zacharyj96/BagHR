@@ -12,6 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 
 public class RVAdapter extends RecyclerView.Adapter<RVAdapter.ItemViewHolder> implements View.OnClickListener {
@@ -67,7 +69,9 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.ItemViewHolder> im
         // the index of the array list it takes data from)
         itemViewHolder.desc.setText(items.get(i).description);
         itemViewHolder.aisle.setText(items.get(i).aisle);
-        itemViewHolder.row.setText(items.get(i).row_number);
+        NumberFormat nf = DecimalFormat.getInstance();
+        nf.setMaximumFractionDigits(0);
+        itemViewHolder.row.setText(nf.format(items.get(i).row_number));
         itemViewHolder.shelf.setText(items.get(i).shelf);
     }
 

@@ -47,6 +47,7 @@ public class Login extends Activity {
         mDatabaseHelper = DatabaseHelper.getInstance(this);
 
 
+
         // hides keyboard when activity is pressed
         findViewById(R.id.mainLayoutLogin).setOnClickListener(new View.OnClickListener() {
             @Override

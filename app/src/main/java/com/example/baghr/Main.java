@@ -64,11 +64,11 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
         navigationView.getMenu().clear();
 
         // get menu based on user type
-        if (currentUser.type == "admin") {
+        if (currentUser.type.equals("admin")) {
             navigationView.inflateMenu(R.menu.activity_home_drawer_admin);
-        } else if (currentUser.type == "manager") {
+        } else if (currentUser.type.equals("manager")) {
             navigationView.inflateMenu(R.menu.activity_home_drawer_manager);
-        } else if (currentUser.type == "hr") {
+        } else if (currentUser.type.equals("hr")) {
             navigationView.inflateMenu(R.menu.activity_home_drawer_hr);
         } else {
             navigationView.inflateMenu(R.menu.activity_home_drawer);
@@ -81,11 +81,11 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
         TextView userName = navigationView.getHeaderView(0).findViewById(R.id.userName);
         TextView userEmail = navigationView.getHeaderView(0).findViewById(R.id.userEmail);
 
-        // userName.setText();
-        // userEmail.setText();
+        userName.setText(currentUser.first_name + " " + currentUser.last_name);
+        userEmail.setText(currentUser.email);
 
 
-        getSupportActionBar().setTitle("Inventory");
+        getSupportActionBar().setTitle("Settings");
     }
 
     private void setupWindowAnimations() {
@@ -253,7 +253,7 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
 
         // for every context code except log out, load a new fragment into memory
 
-        if (context != 11) {
+        if (context != 3) {
             if (fragment == null) {
                 try {
                     fragment = (Fragment) fragmentClass.newInstance();

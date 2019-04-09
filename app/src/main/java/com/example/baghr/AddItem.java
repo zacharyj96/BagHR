@@ -34,13 +34,13 @@ public class AddItem extends Fragment {
                     int count = mainActivity.mDatabaseHelper.getNumItems();
                     if (count != -1) {
                         mainActivity.currentItem.item_number = count + 1;
-                        if(mainActivity.mDatabaseHelper.addItem(mainActivity.currentItem)) {
+                        if (mainActivity.mDatabaseHelper.addItem(mainActivity.currentItem)) {
                             // success
                             getActivity().runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
                                     AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                                    builder.setMessage("Account inserted successfully");
+                                    builder.setMessage("Item inserted successfully");
                                     builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                                         public void onClick(DialogInterface dialog, int id) {
 

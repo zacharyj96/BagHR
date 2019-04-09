@@ -21,8 +21,10 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     private static final String TABLE_INVENTORY = "Inventory";
 
     private DatabaseHelper(Context context) {
-        super(context, DATABASE_NAME, null, 1);
+        super(context, DATABASE_NAME, null, 2);
     }
+
+
 
     public static synchronized DatabaseHelper getInstance(Context context) {
         if (sInstance == null) {
@@ -99,8 +101,14 @@ public class DatabaseHelper extends SQLiteOpenHelper{
 
     public void updateIsStored(String aisle, int row, String shelf) {
         String itemUpdateQuery = String.format("UPDATE Inventory SET is_stored = 0 WHERE aisle = '%s' AND row_number = %d AND shelf = '%s'", aisle, row, shelf);
-        SQLiteDatabase db = getReadableDatabase();
+        SQLiteDatabase db = getWritableDatabase();
         db.execSQL(itemUpdateQuery);
+    }
+
+    public void updateHoursWorked(String email, double hoursWorked) {
+        String userUpdateQuery = String.format("UPDATE Account SET hours_worked = %f WHERE email = '%s'", hoursWorked, email);
+        SQLiteDatabase db = getWritableDatabase();
+        db.execSQL(userUpdateQuery);
     }
 
     public int getNumItems() {
@@ -111,6 +119,8 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         try {
             if (cursor.moveToFirst()) {
                 count = cursor.getCount();
+            } else {
+                count = 0;
             }
         } catch (Exception e) {
             Log.d(TAG, "Error retrieving item count from database");
@@ -148,6 +158,34 @@ public class DatabaseHelper extends SQLiteOpenHelper{
             }
         }
         return items;
+    }
+
+    public ArrayList<User> getUsers() {
+        ArrayList<User> users = new ArrayList<>();
+        String userSelectQuery = String.format("SELECT * FROM Account");
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.rawQuery(userSelectQuery, null);
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    User u = new User();
+                    u.first_name = cursor.getString(cursor.getColumnIndex("first_name"));
+                    u.last_name = cursor.getString(cursor.getColumnIndex("last_name"));
+                    u.email = cursor.getString(cursor.getColumnIndex("email"));
+                    u.password = cursor.getString(cursor.getColumnIndex("password"));
+                    u.hours_worked = cursor.getDouble(cursor.getColumnIndex("hours_worked"));
+                    u.type = cursor.getString(cursor.getColumnIndex("user_type"));
+                    users.add(u);
+                } while (cursor.moveToNext());
+            }
+        } catch (Exception e) {
+            Log.d(TAG, "Error retrieving user profile from database");
+        } finally {
+            if (cursor != null && !cursor.isClosed()) {
+                cursor.close();
+            }
+        }
+        return users;
     }
 
     public ArrayList<Item> getItemByLocation(String aisle, int row, String shelf) {
