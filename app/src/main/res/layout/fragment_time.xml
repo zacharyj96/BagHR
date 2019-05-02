@@ -26,6 +26,16 @@
             android:textStyle="bold"
             android:layout_gravity="center_horizontal"/>
 
+        <Button
+            android:id="@+id/clock"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Clock In"
+            android:textStyle="bold"
+            android:layout_gravity="center_horizontal"/>
+
+
+
     </LinearLayout>
 
 </android.support.v4.widget.NestedScrollView>

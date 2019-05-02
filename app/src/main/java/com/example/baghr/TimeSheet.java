@@ -25,6 +25,8 @@ public class TimeSheet extends Fragment {
 
         Button addHoursSubmit = view.findViewById(R.id.addHoursSubmit);
 
+        final Button clock = view.findViewById(R.id.clock);
+
         addHoursSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -46,6 +48,23 @@ public class TimeSheet extends Fragment {
                             dialog.show();
                         }
                     });
+                }
+            }
+        });
+
+        clock.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mainActivity.timestamp == -1) {
+                    // begin clock in
+                    mainActivity.timestamp = System.nanoTime();
+                    clock.setText("Clock Out");
+                } else {
+                    // begin clock out
+                    mainActivity.currentUser.hours_worked += (System.nanoTime() - mainActivity.timestamp) / 3600000000000.0;
+                    mainActivity.mDatabaseHelper.updateHoursWorked(mainActivity.currentUser.email, mainActivity.currentUser.hours_worked);
+                    mainActivity.timestamp = -1;
+                    clock.setText("Clock In");
                 }
             }
         });

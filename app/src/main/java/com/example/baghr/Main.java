@@ -32,11 +32,13 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
 
     DatabaseHelper mDatabaseHelper;
 
+    long timestamp;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        timestamp = -1;
         setContentView(R.layout.activity_main);
-
         // loads first fragment into activity
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.mainFragment, new Settings());
