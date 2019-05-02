@@ -24,19 +24,32 @@
             android:layout_height="wrap_content"
             android:padding="16dp">
 
+            <Button
+                android:id="@+id/removeItem"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginLeft="8dp"
+                android:text="X"
+                android:textStyle="bold" />
+
             <TextView
                 android:id="@+id/desc"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:text="test"
-                android:textSize="30dp" />
+                android:textSize="30dp"
+                android:layout_toRightOf="@+id/removeItem"
+                android:layout_marginLeft="8dp"/>
+
+
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_below="@+id/desc">
+                android:layout_below="@+id/removeItem">
 
                 <LinearLayout
                     android:layout_width="0dp"

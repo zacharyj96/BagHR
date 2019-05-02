@@ -10,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.text.DecimalFormat;
@@ -26,6 +27,7 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.ItemViewHolder> im
         TextView row;
         TextView shelf;
         TextView itemNum;
+        Button removeItem;
 
         // generates card variables
         ItemViewHolder(View itemView) {
@@ -36,6 +38,7 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.ItemViewHolder> im
             row = itemView.findViewById(R.id.row);
             shelf = itemView.findViewById(R.id.shelf);
             itemNum = itemView.findViewById(R.id.itemNum);
+            removeItem = itemView.findViewById(R.id.removeItem);
         }
     }
 
@@ -69,6 +72,7 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.ItemViewHolder> im
     public void onBindViewHolder(ItemViewHolder itemViewHolder, int i) {
         // fills card with data from items object (rv adapter tells itemviewholder which card number it is, and that's
         // the index of the array list it takes data from)
+        final int j = i;
         itemViewHolder.desc.setText(items.get(i).description);
         itemViewHolder.aisle.setText(items.get(i).aisle);
         NumberFormat nf = DecimalFormat.getInstance();
@@ -76,11 +80,18 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.ItemViewHolder> im
         itemViewHolder.row.setText(nf.format(items.get(i).row_number));
         itemViewHolder.shelf.setText(items.get(i).shelf);
         itemViewHolder.itemNum.setText(nf.format(items.get(i).item_number));
+        itemViewHolder.removeItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Main mainActivity = (Main) context;
+                mainActivity.mDatabaseHelper.updateIsStored(items.get(j).aisle, items.get(j).row_number, items.get(j).shelf);
+            }
+        });
     }
 
     @Override
     public void onClick(View view) {
-        ItemViewHolder itemViewHOlder = (ItemViewHolder) view.getTag();
+        ItemViewHolder itemViewHolder = (ItemViewHolder) view.getTag();
     }
 
     @Override

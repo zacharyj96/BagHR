@@ -23,17 +23,20 @@ public class AddItem extends Fragment {
 
         final EditText addItemDesc = view.findViewById(R.id.addItemDesc);
 
+        final EditText addItemPrice = view.findViewById(R.id.addItemPrice);
+
         Button addItemSubmit = view.findViewById(R.id.addItemSubmit);
 
         addItemSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!addItemDesc.getText().toString().equals("")) {
+                if (!addItemDesc.getText().toString().equals("") && !addItemPrice.getText().toString().equals("") && isDouble(addItemPrice.getText().toString())) {
                     mainActivity.currentItem.description = addItemDesc.getText().toString();
                     mainActivity.currentItem.is_stored = 1;
                     int count = mainActivity.mDatabaseHelper.getNumItems();
                     if (count != -1) {
                         mainActivity.currentItem.item_number = count + 1;
+                        mainActivity.currentItem.price = Double.parseDouble(addItemPrice.getText().toString());
                         if (mainActivity.mDatabaseHelper.addItem(mainActivity.currentItem)) {
                             // success
                             getActivity().runOnUiThread(new Runnable() {
@@ -97,5 +100,14 @@ public class AddItem extends Fragment {
     public void onDestroyView() {
         //fragment cleanup
         super.onDestroyView();
+    }
+
+    public boolean isDouble(String str) {
+        try {
+            Double.parseDouble(str);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 }

@@ -17,6 +17,13 @@
             android:ems="10"
             android:hint="Item Description"
             android:layout_gravity="center_horizontal"/>
+        <EditText
+            android:id="@+id/addItemPrice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Price"
+            android:layout_gravity="center_horizontal"/>
 
         <Button
             android:id="@+id/addItemSubmit"
