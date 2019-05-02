@@ -7,6 +7,8 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.Toast;
 import android.widget.Button;
 import android.widget.EditText;
@@ -26,6 +28,10 @@ public class CreateAccount extends AppCompatActivity {
 
     EditText firstName, lastName, email, password, confirmPassword;
 
+    Spinner spin;
+
+    String[] userTypes = {"Admin, Manager, HR, Salesperson"};
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +45,12 @@ public class CreateAccount extends AppCompatActivity {
         email = findViewById(R.id.email);
         password = findViewById(R.id.password);
         confirmPassword = findViewById(R.id.confirmPassword);
+
+        spin = (Spinner) findViewById(R.id.spinner);
+
+        ArrayAdapter aa = new ArrayAdapter(this, android.R.layout.simple_spinner_item, userTypes);
+        aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spin.setAdapter(aa);
 
         final Context context = CreateAccount.this;
 
@@ -55,6 +67,7 @@ public class CreateAccount extends AppCompatActivity {
                         // create user account
                         String fName = firstName.getText().toString();
                         String lName = lastName.getText().toString();
+                        String userType = spin.getSelectedItem().toString().toLowerCase();
 
 
                         try {
@@ -76,7 +89,7 @@ public class CreateAccount extends AppCompatActivity {
 
                             String savedPasswordHash = new String(org.apache.commons.codec.binary.Base64.encodeBase64(hashBytes));
 
-                            User u = new User(fName, lName, em, savedPasswordHash, 0);
+                            User u = new User(fName, lName, em, savedPasswordHash, 0, userType);
 
                             addAccount(u);
                         } catch (Exception e) {
@@ -130,7 +143,7 @@ public class CreateAccount extends AppCompatActivity {
     }
 
     private boolean validateFields() {
-        return !firstName.getText().toString().equals("") && !lastName.getText().toString().equals("") && !email.getText().toString().equals("") && !password.getText().toString().equals("") && password.getText().toString().equals(confirmPassword.getText().toString());
+        return !firstName.getText().toString().equals("") && !lastName.getText().toString().equals("") && !email.getText().toString().equals("") && !password.getText().toString().equals("") && password.getText().toString().equals(confirmPassword.getText().toString()) && !spin.getSelectedItem().toString().equals("");
     }
 
     private void toastMessage(String message) {
