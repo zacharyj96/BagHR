@@ -30,7 +30,7 @@ public class CreateAccount extends AppCompatActivity {
 
     Spinner spin;
 
-    String[] userTypes = {"Admin, Manager, HR, Salesperson"};
+    String[] userTypes = {"Admin", "Manager", "HR", "Salesperson"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

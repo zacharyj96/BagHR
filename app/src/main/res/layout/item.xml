@@ -26,10 +26,8 @@
 
             <Button
                 android:id="@+id/removeItem"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginLeft="8dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:text="X"
                 android:textStyle="bold" />
 
@@ -140,12 +138,39 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Item Num"
+                        android:text="Item Id"
                         android:textStyle="bold"
                         android:textSize="14dp"/>
 
                     <TextView
                         android:id="@+id/itemNum"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="14dp" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@android:color/darker_gray"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"/>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Price"
+                        android:textStyle="bold"
+                        android:textSize="14dp"/>
+
+                    <TextView
+                        android:id="@+id/itemPrice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="14dp" />

@@ -21,7 +21,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     private static final String TABLE_INVENTORY = "Inventory";
 
     private DatabaseHelper(Context context) {
-        super(context, DATABASE_NAME, null, 2);
+        super(context, DATABASE_NAME, null, 3);
     }
 
 
@@ -38,7 +38,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         String createAccount = "CREATE TABLE IF NOT EXISTS Account (email TEXT PRIMARY KEY, first_name TEXT NOT NULL, last_name TEXT NOT NULL, password TEXT NOT NULL, hours_worked REAL, user_type TEXT NOT NULL)";
 
         // insert code for inventory creation here
-        String createInventory = "CREATE TABLE IF NOT EXISTS Inventory (item_number INTEGER PRIMARY KEY, aisle TEXT NOT NULL, row_number INTEGER NOT NULL, shelf TEXT NOT NULL, description TEXT NOT NULL, is_stored INTEGER)";
+        String createInventory = "CREATE TABLE IF NOT EXISTS Inventory (item_number INTEGER PRIMARY KEY, aisle TEXT NOT NULL, row_number INTEGER NOT NULL, shelf TEXT NOT NULL, description TEXT NOT NULL, is_stored INTEGER, price REAL)";
 
 
         db.execSQL(createAccount);
@@ -87,8 +87,9 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         contentValues.put("item_number", i.item_number);
         contentValues.put("description", i.description);
         contentValues.put("is_stored", i.is_stored);
+        contentValues.put("price", i.price);
 
-        Log.d(TAG, "addItem: Adding " + i.aisle + " " + i.row_number + " " + i.shelf + " " + i.item_number + " " + i.description + " " + i.is_stored + " to " + TABLE_INVENTORY);
+        Log.d(TAG, "addItem: Adding " + i.aisle + " " + i.row_number + " " + i.shelf + " " + i.item_number + " " + i.description + " " + i.is_stored + " " + i.price + " to " + TABLE_INVENTORY);
 
         long result = db.insert(TABLE_INVENTORY, null, contentValues);
 
@@ -153,6 +154,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
                     i.item_number = cursor.getInt(cursor.getColumnIndex("item_number"));
                     i.description = cursor.getString(cursor.getColumnIndex("description"));
                     i.is_stored = cursor.getInt(cursor.getColumnIndex("is_stored"));
+                    i.price = cursor.getInt(cursor.getColumnIndex("price"));
                     items.add(i);
                 } while (cursor.moveToNext());
             }
@@ -209,6 +211,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
                     i.item_number = cursor.getInt(cursor.getColumnIndex("item_number"));
                     i.description = cursor.getString(cursor.getColumnIndex("description"));
                     i.is_stored = cursor.getInt(cursor.getColumnIndex("is_stored"));
+                    i.price = cursor.getInt(cursor.getColumnIndex("price"));
                     items.add(i);
                 } while (cursor.moveToNext());
             }

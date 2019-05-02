@@ -1,6 +1,8 @@
 package com.example.baghr;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
@@ -27,6 +29,7 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.ItemViewHolder> im
         TextView row;
         TextView shelf;
         TextView itemNum;
+        TextView itemPrice;
         Button removeItem;
 
         // generates card variables
@@ -39,6 +42,7 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.ItemViewHolder> im
             shelf = itemView.findViewById(R.id.shelf);
             itemNum = itemView.findViewById(R.id.itemNum);
             removeItem = itemView.findViewById(R.id.removeItem);
+            itemPrice = itemView.findViewById(R.id.itemPrice);
         }
     }
 
@@ -77,16 +81,24 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.ItemViewHolder> im
         itemViewHolder.aisle.setText(items.get(i).aisle);
         NumberFormat nf = DecimalFormat.getInstance();
         nf.setMaximumFractionDigits(0);
+        NumberFormat nf2 = NumberFormat.getCurrencyInstance();
         itemViewHolder.row.setText(nf.format(items.get(i).row_number));
         itemViewHolder.shelf.setText(items.get(i).shelf);
         itemViewHolder.itemNum.setText(nf.format(items.get(i).item_number));
-        itemViewHolder.removeItem.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Main mainActivity = (Main) context;
-                mainActivity.mDatabaseHelper.updateIsStored(items.get(j).aisle, items.get(j).row_number, items.get(j).shelf);
-            }
-        });
+        itemViewHolder.itemPrice.setText(nf2.format(items.get(i).price));
+        if (items.get(i).is_stored == 0) {
+            itemViewHolder.removeItem.setVisibility(View.INVISIBLE);
+        } else {
+            itemViewHolder.removeItem.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Main mainActivity = (Main) context;
+                    mainActivity.mDatabaseHelper.updateIsStored(items.get(j).aisle, items.get(j).row_number, items.get(j).shelf);
+                    mainActivity.launchActivityMenu(0, true);
+                }
+            });
+        }
+
     }
 
     @Override
