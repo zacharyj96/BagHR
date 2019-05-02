@@ -97,6 +97,7 @@ public class CreateAccount extends AppCompatActivity {
                             });
                         }
                     } else {
+                        mDatabaseHelper.updateUserByEmail(email.getText().toString(), firstName.getText().toString(), lastName.getText().toString());
                         // user already exists
                         runOnUiThread(new Runnable() {
                             @Override

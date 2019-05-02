@@ -25,6 +25,7 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.ItemViewHolder> im
         TextView aisle;
         TextView row;
         TextView shelf;
+        TextView itemNum;
 
         // generates card variables
         ItemViewHolder(View itemView) {
@@ -34,6 +35,7 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.ItemViewHolder> im
             aisle = itemView.findViewById(R.id.aisle);
             row = itemView.findViewById(R.id.row);
             shelf = itemView.findViewById(R.id.shelf);
+            itemNum = itemView.findViewById(R.id.itemNum);
         }
     }
 
@@ -73,6 +75,7 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.ItemViewHolder> im
         nf.setMaximumFractionDigits(0);
         itemViewHolder.row.setText(nf.format(items.get(i).row_number));
         itemViewHolder.shelf.setText(items.get(i).shelf);
+        itemViewHolder.itemNum.setText(nf.format(items.get(i).item_number));
     }
 
     @Override

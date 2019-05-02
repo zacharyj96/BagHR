@@ -111,6 +111,12 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         db.execSQL(userUpdateQuery);
     }
 
+    public void updateUserByEmail(String email, String firstName, String lastName) {
+        String userUpdateQuery = String.format("UPDATE Account SET first_name = '%s', last_name = '%s' WHERE email = '%s'", firstName, lastName, email);
+        SQLiteDatabase db = getWritableDatabase();
+        db.execSQL(userUpdateQuery);
+    }
+
     public int getNumItems() {
         int count = -1;
         String itemSelectQuery = String.format("SELECT * FROM Inventory");
