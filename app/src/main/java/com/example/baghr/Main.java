@@ -43,7 +43,7 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
         setContentView(R.layout.activity_main);
         // loads first fragment into activity
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.mainFragment, new Settings());
+        ft.replace(R.id.mainFragment, new Home());
         ft.commit();
 
         mDatabaseHelper = DatabaseHelper.getInstance(this);
@@ -89,7 +89,7 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
         userEmail.setText(currentUser.email);
 
 
-        getSupportActionBar().setTitle("Settings");
+        getSupportActionBar().setTitle("Home");
     }
 
     private void setupWindowAnimations() {
@@ -262,13 +262,21 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
                 getSupportActionBar().setTitle("Inventory Search");
                 break;
 
-            // settings
-            default:
-                fragment = fragmentManager.findFragmentByTag("Settings");
-                tag = "Settings";
-                fragmentClass = Settings.class;
+            // home
+            case 15:
+                fragment = fragmentManager.findFragmentByTag("Home");
+                tag = "Home";
+                fragmentClass = Home.class;
                 isBack = true;
-                getSupportActionBar().setTitle("Settings");
+                getSupportActionBar().setTitle("Home");
+
+            // home
+            default:
+                fragment = fragmentManager.findFragmentByTag("Home");
+                tag = "Home";
+                fragmentClass = Home.class;
+                isBack = true;
+                getSupportActionBar().setTitle("Home");
         }
 
         // for every context code except log out, load a new fragment into memory
@@ -350,6 +358,9 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
                 break;
             case R.id.nav_search:
                 launchActivityMenu(13, false);
+                break;
+            case R.id.nav_home:
+                launchActivityMenu(15, false);
                 break;
             default:
                 launchActivityMenu(6, false);
