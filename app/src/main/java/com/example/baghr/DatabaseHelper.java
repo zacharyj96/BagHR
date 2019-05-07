@@ -21,7 +21,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     private static final String TABLE_INVENTORY = "Inventory";
 
     private DatabaseHelper(Context context) {
-        super(context, DATABASE_NAME, null, 3);
+        super(context, DATABASE_NAME, null, 4);
     }
 
 
