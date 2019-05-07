@@ -34,6 +34,8 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
 
     long timestamp;
 
+    String searchParams;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -242,6 +244,22 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
                 tag = "ViewInventory";
                 fragmentClass = ViewInventory.class;
                 getSupportActionBar().setTitle("View Inventory");
+                break;
+
+            // search
+            case 13:
+                fragment = fragmentManager.findFragmentByTag("Search");
+                tag = "Search";
+                fragmentClass = ViewInventory.class;
+                getSupportActionBar().setTitle("Search");
+                break;
+
+            // view inventory search
+            case 14:
+                fragment = fragmentManager.findFragmentByTag("ViewInventorySearch");
+                tag = "ViewInventorySearch";
+                fragmentClass = ViewInventorySearch.class;
+                getSupportActionBar().setTitle("Inventory Search");
                 break;
 
             // settings

@@ -34,6 +34,9 @@
                 android:icon="@drawable/ic_signout_deac"
                 android:title="Sign Out" />-->
             <item
+                android:id="@+id/nav_search"
+                android:title="Search" />
+            <item
                 android:id="@+id/nav_news"
                 android:title="News" />
             <item

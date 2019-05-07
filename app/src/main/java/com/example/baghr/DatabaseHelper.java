@@ -139,6 +139,35 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         return count;
     }
 
+    public ArrayList<Item> getItems(String search) {
+        ArrayList<Item> items = new ArrayList<>();
+        String itemSelectQuery = String.format("SELECT * FROM Inventory WHERE description LIKE '%%s%' AND is_stored = 1", search);
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.rawQuery(itemSelectQuery, null);
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Item i = new Item();
+                    i.aisle = cursor.getString(cursor.getColumnIndex("aisle"));
+                    i.row_number = cursor.getInt(cursor.getColumnIndex("row_number"));
+                    i.shelf = cursor.getString(cursor.getColumnIndex("shelf"));
+                    i.item_number = cursor.getInt(cursor.getColumnIndex("item_number"));
+                    i.description = cursor.getString(cursor.getColumnIndex("description"));
+                    i.is_stored = cursor.getInt(cursor.getColumnIndex("is_stored"));
+                    i.price = cursor.getInt(cursor.getColumnIndex("price"));
+                    items.add(i);
+                } while (cursor.moveToNext());
+            }
+        } catch (Exception e) {
+            Log.d(TAG, "Error retrieving item profile from database");
+        } finally {
+            if (cursor != null && !cursor.isClosed()) {
+                cursor.close();
+            }
+        }
+        return items;
+    }
+
     public ArrayList<Item> getItems(int stored) {
         ArrayList<Item> items = new ArrayList<>();
         String itemSelectQuery = String.format("SELECT * FROM Inventory WHERE is_stored = %d", stored);
