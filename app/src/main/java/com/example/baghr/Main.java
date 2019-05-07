@@ -250,7 +250,7 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
             case 13:
                 fragment = fragmentManager.findFragmentByTag("Search");
                 tag = "Search";
-                fragmentClass = ViewInventory.class;
+                fragmentClass = Search.class;
                 getSupportActionBar().setTitle("Search");
                 break;
 
@@ -347,6 +347,9 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
                 break;
             case R.id.nav_settings:
                 launchActivityMenu(6, false);
+                break;
+            case R.id.nav_search:
+                launchActivityMenu(13, false);
                 break;
             default:
                 launchActivityMenu(6, false);

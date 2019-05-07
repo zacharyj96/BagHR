@@ -141,7 +141,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
 
     public ArrayList<Item> getItems(String search) {
         ArrayList<Item> items = new ArrayList<>();
-        String itemSelectQuery = String.format("SELECT * FROM Inventory WHERE description LIKE '%%s%' AND is_stored = 1", search);
+        String itemSelectQuery = String.format("SELECT * FROM Inventory WHERE description LIKE '%%%s%%' AND is_stored = 1", search);
         SQLiteDatabase db = getReadableDatabase();
         Cursor cursor = db.rawQuery(itemSelectQuery, null);
         try {

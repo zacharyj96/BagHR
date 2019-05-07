@@ -53,7 +53,7 @@ public class ViewInventorySearch extends Fragment {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mainActivity.launchActivityMenu(0, true);
+                mainActivity.launchActivityMenu(13, true);
             }
         });
 
